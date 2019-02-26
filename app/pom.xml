@@ -14,12 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.bxy</groupId>
-            <artifactId>couchdb</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.bxy</groupId>
-            <artifactId>mongodb</artifactId>
+            <artifactId>cassandra</artifactId>
             <version>${project.version}</version>
         </dependency>
 

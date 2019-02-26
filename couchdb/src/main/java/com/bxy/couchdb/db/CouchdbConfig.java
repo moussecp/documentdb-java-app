@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import java.net.MalformedURLException;
 
 @Configuration
-public class CouchDbConfig {
+public class CouchdbConfig {
 
     public static final String DATABASE_NAME = "db-test";
 
@@ -29,9 +29,9 @@ public class CouchDbConfig {
                 .password("password")
                 .build();
         CouchDbInstance couchDbInstance = new StdCouchDbInstance(httpClient);
-        CouchDbConnector couchDbConnector = new StdCouchDbConnector(DATABASE_NAME, couchDbInstance);
-        couchDbConnector.createDatabaseIfNotExists();
-        return couchDbConnector;
+        CouchDbConnector couchdbConnector = new StdCouchDbConnector(DATABASE_NAME, couchDbInstance);
+        couchdbConnector.createDatabaseIfNotExists();
+        return couchdbConnector;
     }
 
 }

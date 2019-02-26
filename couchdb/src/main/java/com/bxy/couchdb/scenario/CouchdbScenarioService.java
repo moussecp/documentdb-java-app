@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("couchDbScenarioService")
-public class CouchDbScenarioService extends ScenarioService {
+@Service("couchdbScenarioService")
+public class CouchdbScenarioService extends ScenarioService {
 
     @Autowired
-    @Qualifier("scenarioRepositoryCouchDBImpl")
+    @Qualifier("scenarioRepositoryCouchdbImpl")
     private ScenarioRepository scenarioRepository;
 
     @Override

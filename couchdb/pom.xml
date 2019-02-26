@@ -21,7 +21,7 @@
             <artifactId>domain</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!--CouchDB dependencies-->
+        <!--Couchdb dependencies-->
         <dependency>
             <groupId>org.ektorp</groupId>
             <artifactId>org.ektorp</artifactId>

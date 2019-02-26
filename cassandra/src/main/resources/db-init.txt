@@ -1,0 +1,20 @@
+CREATE
+	KEYSPACE scenarios WITH replication = {'class':'SimpleStrategy',
+	'replication_factor' : 3};
+
+
+
+CREATE TABLE SCENARIOS.SCENARIO (
+  id TIMEUUID PRIMARY KEY,
+  NAME varchar,
+  AUTHOR varchar,
+  CREATION_DATE timestamp
+);
+
+CREATE TABLE SCENARIOS.SCENARIO_STEP (
+  id TIMEUUID,
+  SCENARIO UUID,
+  ACTION varchar,
+  TRIGGER_TIME bigint,
+  PRIMARY KEY (SCENARIO, trigger_time, id)
+);

@@ -15,8 +15,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository("scenarioRepositoryCouchDBImpl")
-public class ScenarioRepositoryCouchDBImpl implements ScenarioRepository {
+@Repository("scenarioRepositoryCouchdbImpl")
+public class ScenarioRepositoryCouchdbImpl implements ScenarioRepository {
 
     @Autowired
     CouchDbConnector db;

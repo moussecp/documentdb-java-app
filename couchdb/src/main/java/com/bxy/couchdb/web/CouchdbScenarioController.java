@@ -1,7 +1,8 @@
-package com.bxy.mongodb.web;
+package com.bxy.couchdb.web;
 
-import com.bxy.mongodb.scenario.ScenarioServiceMongoDB;
+import com.bxy.domain.ScenarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,11 +12,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
-@RequestMapping("/mongodb")
-public class MongodbScenarioController {
+@RequestMapping("/couchdb")
+public class CouchdbScenarioController {
 
     @Autowired
-    private ScenarioServiceMongoDB scenarioService;
+    @Qualifier("couchdbScenarioService")
+    private ScenarioService scenarioService;
 
     @RequestMapping(value = "/findAll", method = GET)
     public ResponseEntity findAllScenarios() {

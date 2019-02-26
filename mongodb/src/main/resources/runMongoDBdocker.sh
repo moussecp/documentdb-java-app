@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-#docker run -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=password -p 5984:5984 -d --name my-mongodb mongodb:2.3.0
+docker run -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=password -p 27017:27017 -d --name my-mongodb mongo:4.0.5

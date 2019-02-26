@@ -1,8 +1,7 @@
-package com.bxy.couchdb.web;
+package com.bxy.mariadb.web;
 
-import com.bxy.domain.ScenarioService;
+import com.bxy.mariadb.scenario.ScenarioServiceMariadb;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,12 +11,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
-@RequestMapping("/couchdb")
-public class CouchDbScenarioController {
+@RequestMapping("/mariadb")
+public class MariadbScenarioController {
 
     @Autowired
-    @Qualifier("couchDbScenarioService")
-    private ScenarioService scenarioService;
+    private ScenarioServiceMariadb scenarioService;
 
     @RequestMapping(value = "/findAll", method = GET)
     public ResponseEntity findAllScenarios() {
