@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ScenarioStepFactory {
 
-    public ScenarioStep createScenarioStep(Action action, int actionTriggerTime) {
+    public ModelScenarioStep createScenarioStep(Action action, int actionTriggerTime) {
         return getBuilder()
                 .withAction(action)
                 .withTriggerTime(actionTriggerTime)
@@ -34,8 +34,8 @@ public class ScenarioStepFactory {
             return this;
         }
 
-        public ScenarioStep build() {
-            return new ScenarioStep(action, actionTriggerTime);
+        public ModelScenarioStep build() {
+            return new ModelScenarioStep(action, actionTriggerTime);
         }
     }
 }

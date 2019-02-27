@@ -1,15 +1,13 @@
 package com.bxy.cassandra.db;
 
-import com.bxy.cassandra.scenario.ScenarioStepCassandraDTO;
-import org.springframework.data.cassandra.repository.AllowFiltering;
-import org.springframework.data.repository.CrudRepository;
+import com.bxy.cassandra.scenario.ScenarioStep;
+import org.springframework.data.cassandra.repository.CassandraRepository;
 
 import java.util.List;
 import java.util.UUID;
 
-public interface ScenarioStepRepositoryCassandra extends CrudRepository<ScenarioStepCassandraDTO, String> {
+public interface ScenarioStepRepositoryCassandra extends CassandraRepository<ScenarioStep, String> {
 
-    @AllowFiltering
-    public List<ScenarioStepCassandraDTO> findByScenarioIdOrderByActionTriggerTime(UUID scenarioId);
+    List<ScenarioStep> findByScenarioId(UUID scenarioId);
 
 }

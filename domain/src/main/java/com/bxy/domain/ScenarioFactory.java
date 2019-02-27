@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public class ScenarioFactory {
 
-    public Scenario createScenario(String name, String author, List<ScenarioStep> scenarioSteps) {
+    public ModelScenario createScenario(String name, String author, List<ModelScenarioStep> scenarioSteps) {
         return getBuilder()
                 .withName(name)
                 .withAuthor(author)
@@ -27,7 +27,7 @@ public class ScenarioFactory {
 
         private String name;
         private String author;
-        private List<ScenarioStep> scenarioSteps;
+        private List<ModelScenarioStep> scenarioSteps;
 
         public ScenarioBuilder withName(String name) {
             this.name = name;
@@ -39,13 +39,13 @@ public class ScenarioFactory {
             return this;
         }
 
-        public ScenarioBuilder withScenarioSteps(List<ScenarioStep> scenarioSteps) {
+        public ScenarioBuilder withScenarioSteps(List<ModelScenarioStep> scenarioSteps) {
             this.scenarioSteps = scenarioSteps;
             return this;
         }
 
-        public Scenario build() {
-            return new Scenario(name, author, LocalDateTime.now(), scenarioSteps);
+        public ModelScenario build() {
+            return new ModelScenario(name, author, LocalDateTime.now(), scenarioSteps);
         }
     }
 }

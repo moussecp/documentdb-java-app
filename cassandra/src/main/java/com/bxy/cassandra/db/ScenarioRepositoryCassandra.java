@@ -1,22 +1,13 @@
 package com.bxy.cassandra.db;
 
-import com.bxy.cassandra.scenario.ScenarioCassandraDTO;
-import org.springframework.data.cassandra.repository.AllowFiltering;
-import org.springframework.data.repository.CrudRepository;
+import com.bxy.cassandra.scenario.Scenario;
+import org.springframework.data.cassandra.repository.CassandraRepository;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface ScenarioRepositoryCassandra extends CrudRepository<ScenarioCassandraDTO, String> {
+public interface ScenarioRepositoryCassandra extends CassandraRepository<Scenario, String> {
 
-    @AllowFiltering
-    public Optional<ScenarioCassandraDTO> findById(UUID id);
-
-    @AllowFiltering
-    public List<ScenarioCassandraDTO> findByAuthor(String author);
-
-    @AllowFiltering
-    public List<ScenarioCassandraDTO> findByNameContaining(String name);
+    Optional<Scenario> findById(UUID id);
 
 }

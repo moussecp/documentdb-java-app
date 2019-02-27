@@ -14,16 +14,16 @@ public abstract class ScenarioService {
     private ScenarioStepFactory scenarioStepFactory;
 
 
-    public Scenario createSimpleScenario(String name) {
-        Scenario scenario = scenarioFactory.createScenario(name, "BXY", getSimpleScenarioSteps());
+    public ModelScenario createSimpleScenario(String name) {
+        ModelScenario scenario = scenarioFactory.createScenario(name, "BXY", getSimpleScenarioSteps());
         add(scenario);
         return scenario;
     }
 
-    public abstract void add(Scenario scenario);
+    public abstract void add(ModelScenario scenario);
 
-    private List<ScenarioStep> getSimpleScenarioSteps() {
-        List<ScenarioStep> scenarioSteps = new ArrayList<>();
+    private List<ModelScenarioStep> getSimpleScenarioSteps() {
+        List<ModelScenarioStep> scenarioSteps = new ArrayList<>();
         scenarioSteps.add(scenarioStepFactory.createScenarioStep(Action.START_TRAIN, 0));
         scenarioSteps.add(scenarioStepFactory.createScenarioStep(Action.SET_SPEED_TO_SLOW, 2));
         scenarioSteps.add(scenarioStepFactory.createScenarioStep(Action.STOP_TRAIN, 5));
@@ -36,8 +36,8 @@ public abstract class ScenarioService {
 
     public abstract List<String> findAll();
 
-    public List<Scenario> generateScenarios(int numberOdScenarios) {
-        List<Scenario> scenarios = new ArrayList<>();
+    public List<ModelScenario> generateScenarios(int numberOdScenarios) {
+        List<ModelScenario> scenarios = new ArrayList<>();
         for (int i = 0; i < numberOdScenarios; i++) {
             scenarios.add(createSimpleScenario("generated" + i));
         }

@@ -4,18 +4,18 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-public class Scenario {
+public class ModelScenario {
 
     private String name;
     private String author;
     private LocalDateTime creationDate;
-    private List<ScenarioStep> scenarioSteps;
+    private List<ModelScenarioStep> scenarioSteps;
 
-    public Scenario() {
+    public ModelScenario() {
     }
 
-    public Scenario(String name, String author, LocalDateTime creationDate,
-            List<ScenarioStep> scenarioSteps) {
+    public ModelScenario(String name, String author, LocalDateTime creationDate,
+                         List<ModelScenarioStep> scenarioSteps) {
         this.name = name;
         this.author = author;
         this.creationDate = creationDate;
@@ -42,18 +42,18 @@ public class Scenario {
         this.creationDate = creationDate;
     }
 
-    public List<ScenarioStep> getScenarioSteps() {
+    public List<ModelScenarioStep> getScenarioSteps() {
         return scenarioSteps;
     }
 
-    public void setScenarioSteps(List<ScenarioStep> scenarioSteps) {
+    public void setScenarioSteps(List<ModelScenarioStep> scenarioSteps) {
         this.scenarioSteps = scenarioSteps;
     }
 
     @Override public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Scenario scenario = (Scenario) o;
+        ModelScenario scenario = (ModelScenario) o;
         return Objects.equals(getName(), scenario.getName()) &&
                 Objects.equals(getAuthor(), scenario.getAuthor()) &&
                 Objects.equals(getCreationDate(), scenario.getCreationDate()) &&
@@ -65,7 +65,7 @@ public class Scenario {
     }
 
     @Override public String toString() {
-        return "Scenario{" +
+        return "ModelScenario{" +
                 "name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", creationDate=" + creationDate +

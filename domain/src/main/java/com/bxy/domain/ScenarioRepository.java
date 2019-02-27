@@ -6,5 +6,5 @@ public interface ScenarioRepository {
 
     List<String> findAll();
 
-    void add(Scenario scenario);
+    void add(ModelScenario scenario);
 }

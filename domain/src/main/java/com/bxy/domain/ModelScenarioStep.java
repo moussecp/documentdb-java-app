@@ -2,15 +2,15 @@ package com.bxy.domain;
 
 import java.util.Objects;
 
-public class ScenarioStep {
+public class ModelScenarioStep {
 
     private Action action;
     private int actionTriggerTime;
 
-    public ScenarioStep() {
+    public ModelScenarioStep() {
     }
 
-    public ScenarioStep(Action action, int actionTriggerTime) {
+    public ModelScenarioStep(Action action, int actionTriggerTime) {
         this.action = action;
         this.actionTriggerTime = actionTriggerTime;
     }
@@ -34,7 +34,7 @@ public class ScenarioStep {
     @Override public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ScenarioStep that = (ScenarioStep) o;
+        ModelScenarioStep that = (ModelScenarioStep) o;
         return actionTriggerTime == that.actionTriggerTime &&
                 action == that.action;
     }
@@ -44,7 +44,7 @@ public class ScenarioStep {
     }
 
     @Override public String toString() {
-        return "ScenarioStep{" +
+        return "ModelScenarioStep{" +
                 "action=" + action +
                 ", actionTriggerTime=" + actionTriggerTime +
                 '}';

@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
-@Table("scenario")
-public class ScenarioCassandraDTO {
+@Table("SCENARIO")
+public class Scenario {
 
     @PrimaryKey
     private UUID id;
@@ -21,10 +21,10 @@ public class ScenarioCassandraDTO {
     @Column("CREATION_DATE")
     private LocalDateTime creationDate;
 
-    public ScenarioCassandraDTO() {
+    public Scenario() {
     }
 
-    public ScenarioCassandraDTO(String name, String author, LocalDateTime creationDate) {
+    public Scenario(String name, String author, LocalDateTime creationDate) {
         this.id = UUIDs.timeBased();
         this.name = name;
         this.author = author;
@@ -60,7 +60,7 @@ public class ScenarioCassandraDTO {
     }
 
     @Override public String toString() {
-        return "ScenarioCassandraDTO{" +
+        return "ModelScenario{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
@@ -71,7 +71,7 @@ public class ScenarioCassandraDTO {
     @Override public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ScenarioCassandraDTO that = (ScenarioCassandraDTO) o;
+        Scenario that = (Scenario) o;
         return Objects.equals(getId(), that.getId()) &&
                 Objects.equals(getName(), that.getName()) &&
                 Objects.equals(getAuthor(), that.getAuthor()) &&

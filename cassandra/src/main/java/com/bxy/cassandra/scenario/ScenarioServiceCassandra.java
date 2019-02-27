@@ -6,13 +6,13 @@ import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import static com.bxy.domain.Action.*;
+import static java.time.LocalDateTime.now;
 
 @Service
 public class ScenarioServiceCassandra {
@@ -22,45 +22,46 @@ public class ScenarioServiceCassandra {
     @Autowired
     private ScenarioStepRepositoryCassandra scenarioStepRepository;
 
-    public List<ScenarioCassandraDTO> findAll() {
+    public List<Scenario> findAll() {
         return Lists.newArrayList(scenarioRepository.findAll());
     }
 
-    public ScenarioCassandraDTO createSimpleScenario(String name) {
-        ScenarioCassandraDTO scenario = scenarioRepository
-                .save(new ScenarioCassandraDTO(name, "BXY", LocalDateTime.now()));
+    public Scenario createSimpleScenario(String name) {
+        Scenario scenario = scenarioRepository
+                .save(new Scenario(name, "BXY", now()));
         createScenarioSteps(scenario);
         return scenario;
     }
 
-    public List<ScenarioCassandraDTO> generateScenarios(int numberOfScenarios) {
-        List<ScenarioCassandraDTO> scenarios = new ArrayList<>();
+    public List<Scenario> generateScenarios(int numberOfScenarios) {
+        List<Scenario> scenarios = new ArrayList<>();
         for (int i = 0; i < numberOfScenarios; i++) {
             scenarios.add(createSimpleScenario("scenario-number-" + i));
         }
         return scenarios;
     }
 
-    private void createScenarioSteps(ScenarioCassandraDTO scenario) {
-        List<ScenarioStepCassandraDTO> scenarioSteps = new ArrayList<>();
+    private void createScenarioSteps(Scenario scenario) {
+        List<ScenarioStep> scenarioSteps = new ArrayList<>();
         UUID scenarioId = scenario.getId();
-        scenarioSteps.add(new ScenarioStepCassandraDTO(scenarioId, START_TRAIN, 1));
-        scenarioSteps.add(new ScenarioStepCassandraDTO(scenarioId, SET_SPEED_TO_SLOW, 2));
-        scenarioSteps.add(new ScenarioStepCassandraDTO(scenarioId, STOP_TRAIN, 5));
-        scenarioSteps.add(new ScenarioStepCassandraDTO(scenarioId, START_TRAIN, 7));
-        scenarioSteps.add(new ScenarioStepCassandraDTO(scenarioId, SET_SPEED_TO_FAST, 10));
-        scenarioSteps.add(new ScenarioStepCassandraDTO(scenarioId, ADD_DELAY, 15));
-        scenarioSteps.add(new ScenarioStepCassandraDTO(scenarioId, SET_SPEED_TO_NORMAL, 35));
-        for (ScenarioStepCassandraDTO scenarioStep : scenarioSteps) {
+        scenarioSteps.add(new ScenarioCreateTrainStep(scenarioId, 0, "2E1234", "FL-FLV"));
+        scenarioSteps.add(new ScenarioActionStep(scenarioId, 1, START_TRAIN));
+        scenarioSteps.add(new ScenarioActionStep(scenarioId, 2, SET_SPEED_TO_SLOW));
+        scenarioSteps.add(new ScenarioActionStep(scenarioId, 7, STOP_TRAIN));
+        scenarioSteps.add(new ScenarioActionStep(scenarioId, 12, START_TRAIN));
+        scenarioSteps.add(new ScenarioActionStep(scenarioId, 13, SET_SPEED_TO_FAST));
+        scenarioSteps.add(new ScenarioActionStep(scenarioId, 22, ADD_DELAY));
+        scenarioSteps.add(new ScenarioActionStep(scenarioId, 35, SET_SPEED_TO_NORMAL));
+        for (ScenarioStep scenarioStep : scenarioSteps) {
             scenarioStepRepository.save(scenarioStep);
         }
     }
 
-    public Optional<ScenarioCassandraDTO> find(UUID scenarioId) {
+    public Optional<Scenario> find(UUID scenarioId) {
         return scenarioRepository.findById(scenarioId);
     }
 
-    public List<ScenarioStepCassandraDTO> findScenarioSteps(UUID scenarioId) {
-        return scenarioStepRepository.findByScenarioIdOrderByActionTriggerTime(scenarioId);
+    public List<ScenarioStep> findScenarioSteps(UUID scenarioId) {
+        return scenarioStepRepository.findByScenarioId(scenarioId);
     }
 }
