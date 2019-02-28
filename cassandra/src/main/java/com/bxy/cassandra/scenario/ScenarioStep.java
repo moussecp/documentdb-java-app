@@ -1,28 +1,22 @@
 package com.bxy.cassandra.scenario;
 
-import com.datastax.driver.core.utils.UUIDs;
-import org.springframework.data.cassandra.core.mapping.Column;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import javax.persistence.*;
 
-import java.util.Objects;
-import java.util.UUID;
-
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class ScenarioStep {
 
-    @PrimaryKey
-    @Column("ID")
-    private UUID id;
-    @Column("TRIGGER_TIME")
+    @Column(name = "TRIGGER_TIME")
     private int triggerTime;
-    @Column("SCENARIO_ID")
-    private UUID scenarioId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "SCENARIO_ID")
+    private Scenario scenario;
 
     public ScenarioStep() {
     }
 
-    public ScenarioStep(UUID scenarioId, int triggerTime) {
-        this.id = UUIDs.timeBased();
-        this.scenarioId = scenarioId;
+    public ScenarioStep(Scenario scenario, int triggerTime) {
+        this.scenario = scenario;
         this.triggerTime = triggerTime;
     }
 
@@ -30,35 +24,16 @@ public abstract class ScenarioStep {
         return triggerTime;
     }
 
-    public UUID getId() {
-        return id;
+    public void setTriggerTime(int triggerTime) {
+        this.triggerTime = triggerTime;
     }
 
-    public UUID getScenarioId() {
-        return scenarioId;
+    public Scenario getScenario() {
+        return scenario;
     }
 
-    @Override
-    public String toString() {
-        return "ScenarioStep{" +
-                "id=" + id +
-                ", triggerTime=" + triggerTime +
-                ", scenarioId=" + scenarioId +
-                '}';
+    public void setScenario(Scenario scenario) {
+        this.scenario = scenario;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ScenarioStep that = (ScenarioStep) o;
-        return getTriggerTime() == that.getTriggerTime() &&
-                Objects.equals(getId(), that.getId()) &&
-                Objects.equals(getScenarioId(), that.getScenarioId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getTriggerTime(), getScenarioId());
-    }
 }

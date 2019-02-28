@@ -1,25 +1,36 @@
 package com.bxy.cassandra.scenario;
 
 import com.bxy.domain.Action;
-import org.springframework.data.cassandra.core.mapping.Column;
-import org.springframework.data.cassandra.core.mapping.Table;
 
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.StringJoiner;
-import java.util.UUID;
 
-@Table("SCENARIO_ACTION_STEP")
+@Entity
+@Table(name = "SCENARIO_ACTION_STEP")
 public class ScenarioActionStep extends ScenarioStep {
 
-    @Column("ACTION")
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column(name = "ACTION")
     private Action action;
 
     public ScenarioActionStep() {
     }
 
-    public ScenarioActionStep(UUID scenarioId, int triggerTime, Action action) {
-        super(scenarioId, triggerTime);
+    public ScenarioActionStep(Scenario scenario, int triggerTime, Action action) {
+        super(scenario, triggerTime);
         this.action = action;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Action getAction() {
@@ -50,4 +61,5 @@ public class ScenarioActionStep extends ScenarioStep {
                 .add("action=" + action)
                 .toString();
     }
+
 }

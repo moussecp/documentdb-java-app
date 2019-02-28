@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="http://java.sun.com/xml/ns/persistence"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+
+    <persistence-unit name="scenario-persistence" transaction-type="JTA">
+        <!-- Use the Hibernate OGM provider: configuration will be transparent -->
+        <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
+        <properties>
+            <!-- Here you will pick which NoSQL technology to use, and configure it;
+                 in this example we start a local in-memory Infinispan node. -->
+            <!--<property name="javax.persistence.jdbc.driver" value="com.dbschema.CassandraJdbcDriver"/>-->
+            <property name="hibernate.ogm.datastore.host" value="jdbc:cassandra://localhost:9042/scenarios"/>
+            <!--<property name="hibernate.ogm.datastore.username" value=""/>-->
+            <!--<property name="hibernate.ogm.datastore.password" value=""/>-->
+            <property name="hibernate.ogm.datastore.provider"
+                      value="org.hibernate.ogm.datastore.cassandra.impl.CassandraDatastoreProvider"/>
+            <property name="hibernate.ogm.datastore.database" value="scenarios"/>
+        </properties>
+    </persistence-unit>
+</persistence>
+

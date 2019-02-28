@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
-
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -25,12 +23,12 @@ public class CassandraScenarioController {
     }
 
     @RequestMapping(value = "/scenario/find/{scenarioId}", method = GET)
-    public ResponseEntity findScenario(@PathVariable UUID scenarioId) {
+    public ResponseEntity findScenario(@PathVariable Long scenarioId) {
         return ResponseEntity.ok(scenarioService.find(scenarioId));
     }
 
     @RequestMapping(value = "/scenariosteps/find/{scenarioId}", method = GET)
-    public ResponseEntity findScenarioSteps(@PathVariable UUID scenarioId) {
+    public ResponseEntity findScenarioSteps(@PathVariable Long scenarioId) {
         return ResponseEntity.ok(scenarioService.findScenarioSteps(scenarioId));
     }
 

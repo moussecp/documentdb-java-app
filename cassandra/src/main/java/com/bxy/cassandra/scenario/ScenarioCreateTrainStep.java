@@ -1,27 +1,36 @@
 package com.bxy.cassandra.scenario;
 
-import org.springframework.data.cassandra.core.mapping.Column;
-import org.springframework.data.cassandra.core.mapping.Table;
+import javax.persistence.*;
 
-import java.util.Objects;
-import java.util.StringJoiner;
-import java.util.UUID;
-
-@Table("SCENARIO_CREATE_TRAIN_STEP")
+@Entity
+@Table(name = "SCENARIO_CREATE_TRAIN_STEP")
 public class ScenarioCreateTrainStep extends ScenarioStep {
 
-    @Column("TRAIN_NUMBER")
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column(name = "TRAIN_NUMBER")
     private String trainNumber;
-    @Column("MOVEMENT_LINE")
+
+    @Column(name = "MOVEMENT_LINE")
     private String movementLine;
 
     public ScenarioCreateTrainStep() {
     }
 
-    public ScenarioCreateTrainStep(UUID scenarioId, int triggerTime, String trainNumber, String movementLine) {
-        super(scenarioId, triggerTime);
+    public ScenarioCreateTrainStep(Scenario scenario, int triggerTime, String trainNumber, String movementLine) {
+        super(scenario, triggerTime);
         this.trainNumber = trainNumber;
         this.movementLine = movementLine;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTrainNumber() {
@@ -32,26 +41,12 @@ public class ScenarioCreateTrainStep extends ScenarioStep {
         return movementLine;
     }
 
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", ScenarioCreateTrainStep.class.getSimpleName() + "[", "]")
-                .add("trainNumber='" + trainNumber + "'")
-                .add("movementLine='" + movementLine + "'")
-                .toString();
+    public void setTrainNumber(String trainNumber) {
+        this.trainNumber = trainNumber;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        ScenarioCreateTrainStep that = (ScenarioCreateTrainStep) o;
-        return Objects.equals(trainNumber, that.trainNumber) &&
-                Objects.equals(movementLine, that.movementLine);
+    public void setMovementLine(String movementLine) {
+        this.movementLine = movementLine;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), trainNumber, movementLine);
-    }
 }
