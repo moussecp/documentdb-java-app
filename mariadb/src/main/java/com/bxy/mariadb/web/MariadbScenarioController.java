@@ -1,6 +1,6 @@
 package com.bxy.mariadb.web;
 
-import com.bxy.mariadb.scenario.ScenarioServiceMariadb;
+import com.bxy.mariadb.scenario.ScenarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,21 +15,26 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class MariadbScenarioController {
 
     @Autowired
-    private ScenarioServiceMariadb scenarioService;
+    private ScenarioService scenarioService;
 
-    @RequestMapping(value = "/findAll", method = GET)
+    @RequestMapping(value = "/scenario/findAll", method = GET)
     public ResponseEntity findAllScenarios() {
         return ResponseEntity.ok(scenarioService.findAll());
     }
 
-    @RequestMapping(value = "/addNew/{name}", method = POST)
+    @RequestMapping(value = "/scenario/addNew/{name}", method = POST)
     public ResponseEntity addNew(@PathVariable String name) {
         return ResponseEntity.ok(scenarioService.createSimpleScenario(name));
     }
 
-    @RequestMapping(value = "/generate", method = GET)
+    @RequestMapping(value = "/scenario/generate", method = GET)
     public ResponseEntity generate() {
         return ResponseEntity.ok(scenarioService.generateScenarios(100));
+    }
+
+    @RequestMapping(value = "/scenariosteps/find/{scenarioId}", method = GET)
+    public ResponseEntity findScenarioSteps(@PathVariable Long scenarioId) {
+        return ResponseEntity.ok(scenarioService.findScenarioSteps(scenarioId));
     }
 
 }

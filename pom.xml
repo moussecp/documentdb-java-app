@@ -11,7 +11,7 @@
 
     <modules>
         <module>domain</module>
-        <module>cassandra</module>
+        <module>mariadb</module>
         <module>app</module>
     </modules>
 
